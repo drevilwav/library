@@ -1,3 +1,10 @@
+.no-select {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Standard */
+}
+
 html,
 body {
   height: 100%;
@@ -33,7 +40,7 @@ header {
 
 main {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 300px);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-rows: 200px;
   background-color: white;
   padding: 20px;
@@ -48,27 +55,29 @@ main {
   background-color: #f3ede3;
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid #72706b79;  
+  border: 1px solid #72706b79; 
+  position: relative; 
 }
 
 .title {
   font-weight: 700;
 }
 
-.read {
-  align-self: center;
-  color: #424242;
-  background-color: lightgreen;
-  padding: 5px 15px;
-  border-radius: 5px;
-}
-
+.read,
 .unread {
   align-self: center;
   color: #424242;
-  background-color: lightcoral;
   padding: 5px 15px;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.read {
+  background-color: lightgreen;
+}
+
+.unread {
+  background-color: lightcoral;
 }
 
 .book-form {
@@ -76,7 +85,7 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  transition: transform 0ms ease-in-out;
+  transition: transform 200ms ease-in-out;
   border-radius: 20px;
   z-index: 10;
   background-color: #faf6ef;
@@ -139,7 +148,7 @@ main {
   display: flex;
   justify-content: center;
   gap: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 10px; 
 }
 
 .form-book button {
@@ -153,4 +162,16 @@ main {
   align-self: center;
   text-align: center;
   width: 100px;
+}
+
+.delete-book {
+  font-size: 24px;             
+  font-weight: bold;      
+  color: #333;       
+  background: none;     
+  border: none;            
+  cursor: pointer;      
+  position: absolute;       
+  top: 10px;               
+  right: 10px;         
 }
