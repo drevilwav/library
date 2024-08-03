@@ -12,7 +12,7 @@ body {
   justify-content: start;
 }
 
-button {
+header button {
   all: unset;
   padding: 10px 26px;
   border: 1px solid #72706b79;
@@ -57,4 +57,100 @@ main {
 
 .read {
   align-self: center;
+  color: #424242;
+  background-color: lightgreen;
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+.unread {
+  align-self: center;
+  color: #424242;
+  background-color: lightcoral;
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+.book-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0ms ease-in-out;
+  border-radius: 20px;
+  z-index: 10;
+  background-color: #faf6ef;
+  height: 380px;
+  width: 500px;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #72706b79;    
+}
+
+.book-form.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.form-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  font-size: 24px;
+  font-weight: 700;
+  padding-top: 10px;
+}
+
+.close {
+  font-size: 24px;             
+  font-weight: bold;      
+  color: #333;       
+  background: none;     
+  border: none;            
+  cursor: pointer;      
+  position: absolute;       
+  top: 10px;               
+  right: 10px;         
+}
+
+.form-book {
+  display: flex;
+  flex-direction: column;
+  width: 370px;
+}
+
+.form-book input[type="text"],
+.form-book input[type="number"] {
+  border: 1px solid #72706b79;
+  border-radius: 3px;
+  height: 20px;
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+
+.form-book input[type="checkbox"] {
+  width: 1.15em;
+  height: 1.15em;
+}
+
+.read-check {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 10px;
+}
+
+.form-book button {
+  all: unset;
+  padding: 10px 26px;
+  border: 1px solid #72706b79;
+  border-radius: 10px;
+  background-color: #e0dbd2;
+  cursor: pointer;
+  margin-top: 10px;
+  align-self: center;
+  text-align: center;
+  width: 100px;
 }
