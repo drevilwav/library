@@ -1,17 +1,58 @@
-const library = [];
+// const library = [];
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+// function Book(title, author, pages, read) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.read = read;
+// }
+
+
+// function addBook(title, author, pages, read) {
+//   const newBook = new Book(title, author, pages, read);
+//   library.push(newBook);
+//   displayBooks();
+// }
+
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 }
 
-function addBook(title, author, pages, read) {
-  const newBook = new Book(title, author, pages, read);
-  library.push(newBook);
-  displayBooks();
+class Library {
+  constructor() {
+    this.books = [];
+  }
+
+  addBook(book) {
+    this.books.push(book);
+  }
+
+  deleteBook(index) {
+    this.books.splice(index, 1);
+  }
+
+  toggleReadStatus(index) {
+    this.books[index].read = !this.books[index].read;
+  }
+
+  getBooks() {
+    return this.books;
+  }
 }
+
+
+
+
+
+
+
+
+
 
 function displayBooks() {
   const booksDisplay = document.querySelector('main');
