@@ -84,6 +84,17 @@
 
 // displayBooks();
 
+
+  // const deleteButton = document.querySelectorAll('.delete-book');
+  // deleteButton.forEach(button => {
+  //   button.addEventListener('click', (event) => {
+  //     const index = button.getAttribute('data-index');
+  //     library.splice(index, 1);
+  //     displayBooks();
+  //     event.stopPropagation();      
+  //   });
+  // });
+
 class Book {
   constructor(title, author, pages, read) {
     this.title = title;
@@ -165,36 +176,52 @@ class InteractionHandler {
     this.closeButton.addEventListener('click', () => {
       this.formWindow.classList.remove('active');
     });
+    this.bookDisplay.renderBooks();
+    this.bindBookEvents();
   }
 
   handleFormSubmit() {
-    const title = document.querySelector('#title').value;
-    const author = document.querySelector('#author').value;
-    const pages = document.querySelector('#pages').value;
-    const read = document.querySelector('#read').checked;
+    const title = document.querySelector('.title').value;
+    const author = document.querySelector('.author').value;
+    const pages = document.querySelector('.pages').value;
+    const read = document.querySelector('.read').checked;
 
     const newBook = new Book (title, author, pages, read);
 
     this.library.addBook(newBook);
-
     this.bookDisplay.renderBooks();
-
     this.formWindow.classList.remove('active');
     this.formElement.reset();
+    this.bindBookEvents();
   }
   
-  handleDeleteBook() {
+  handleDeleteBook(index) {
+    this.library.deleteBook(index);
+    this.bookDisplay.renderBooks();
+    this.bindBookEvents();
+  }
 
+  handleToggleStatus(index) {
+    this.library.toggleReadStatus(index);
+    this.bookDisplay.renderBooks();
+    this.bindBookEvents();
+  }
 
+  bindBookEvents() {
+    const deleteButtons = this.bookDisplay.mainElement.querySelectorAll('.delete-book');
+    deleteButtons.forEach((button) => {
+      const index = button.getAttribute('data-index');
+      button.addEventListener('click', () => {
+        this.handleDeleteBook(index);
+      });
+    });
+
+    const toggleButtons = this.bookDisplay.mainElement.querySelectorAll('.status-toggle');
+    toggleButtons.forEach((button) => {
+      const index = button.getAttribute('data-index');
+      button.addEventListener('click', () => {
+        this.handleToggleStatus(index);
+      });
+    });
   }
 }
-
-  // const deleteButton = document.querySelectorAll('.delete-book');
-  // deleteButton.forEach(button => {
-  //   button.addEventListener('click', (event) => {
-  //     const index = button.getAttribute('data-index');
-  //     library.splice(index, 1);
-  //     displayBooks();
-  //     event.stopPropagation();      
-  //   });
-  // });
