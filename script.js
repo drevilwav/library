@@ -159,14 +159,14 @@ class InteractionHandler {
     this.library = library;
     this.bookDisplay = bookDisplay;
     this.formWindow = document.querySelector(formWindowSelector);
-    this.formElement = document.querySelector(formSelector);
+    this.form = document.querySelector(formSelector);
     this.addButton = document.querySelector(addSelector);
     this.closeButton = document.querySelector(closeSelector);
     this.toggleButton = document.querySelector(toggleSelector);
   }
 
   init() {
-    this.formElement.addEventListener('submit', (event) => {
+    this.form.addEventListener('submit', (event) => {
       event.preventDefault();
       this.handleFormSubmit();
     });
@@ -176,22 +176,26 @@ class InteractionHandler {
     this.closeButton.addEventListener('click', () => {
       this.formWindow.classList.remove('active');
     });
+    for (let i = 0; i < 10; i++) {
+      const newBook = new Book(`Book ${i + 1}`, 'Author', 100, false);
+      this.library.addBook(newBook);
+    }
     this.bookDisplay.renderBooks();
     this.bindBookEvents();
   }
 
   handleFormSubmit() {
-    const title = document.querySelector('.title').value;
-    const author = document.querySelector('.author').value;
-    const pages = document.querySelector('.pages').value;
-    const read = document.querySelector('.read').checked;
+    const title = document.querySelector('#title').value;
+    const author = document.querySelector('#author').value;
+    const pages = document.querySelector('#pages').value;
+    const read = document.querySelector('#read').checked;
 
     const newBook = new Book (title, author, pages, read);
 
     this.library.addBook(newBook);
     this.bookDisplay.renderBooks();
     this.formWindow.classList.remove('active');
-    this.formElement.reset();
+    this.form.reset();
     this.bindBookEvents();
   }
   
@@ -225,3 +229,19 @@ class InteractionHandler {
     });
   }
 }
+
+const library = new Library();
+const bookDisplay = new BookDisplay(library, 'main');
+const interactionHandler = new InteractionHandler(
+  library,
+  bookDisplay,
+  '.book-form',
+  '.form-book',
+  '.add-book',
+  '.close',
+  '.status-toggle'
+);
+
+interactionHandler.init();
+
+
